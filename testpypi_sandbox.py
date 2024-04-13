@@ -13,7 +13,7 @@ def print_message() -> None:
 
 
 def get_message() -> str:
-    return "Welcome to TestPyPI_sandbox!"
+    return "Welcome to TestPyPI-sandbox!"
 
 
 if __name__ == "__main__":
