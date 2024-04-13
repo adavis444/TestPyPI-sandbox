@@ -1,0 +1,20 @@
+"""Simple sandbox module to upload to TestPyPI."""
+
+__version__ = "0.0.1"
+
+
+def main() -> None:
+    print_message()
+
+
+def print_message() -> None:
+    message = get_message()
+    print(message)
+
+
+def get_message() -> str:
+    return "Welcome to TestPyPI_sandbox!"
+
+
+if __name__ == "__main__":
+    main()
