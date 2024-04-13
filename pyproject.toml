@@ -4,11 +4,21 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "TestPyPI-sandbox"
-authors = [{name = "Adam Davis"}]
 readme = "README.md"
+requires-python = ">=3.8"
 license = {file = "LICENSE"}
+authors = [{name = "Adam Davis"}]
 classifiers = ["License :: OSI Approved :: MIT License"]
+dependencies = []
 dynamic = ["version", "description"]
+
+[project.optional-dependencies]
+test = ["flake8", "pytest"]
+build = ["flit"]
 
 [project.urls]
 Home = "https://github.com/adavis444/TestPyPI-sandbox"
+Source = "https://github.com/adavis444/TestPyPI-sandbox"
+
+[tool.flit.module]
+name = "testpypi_sandbox"
