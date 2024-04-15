@@ -71,11 +71,12 @@ jobs:
         uses: sigstore/gh-action-sigstore-python@v2.1.1
         with:
           inputs: ./dist/**
-      - name: Download all the dists
+      - name: Download SOURCE_DATE_EPOCH
         uses: actions/download-artifact@v4
         with:
           name: SOURCE_DATE_EPOCH
           path: dist/
+      - uses: actions/checkout@v4
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
