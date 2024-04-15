@@ -1,6 +1,6 @@
 """Simple sandbox module to upload to TestPyPI."""
 
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 
 
 def main() -> None:
