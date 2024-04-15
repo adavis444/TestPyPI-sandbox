@@ -17,7 +17,7 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: |
           SOURCE_DATE_EPOCH=$(date +%s)
-          mkdir -p dist
+          mkdir -p dist/
           echo $SOURCE_DATE_EPOCH | tee SOURCE_DATE_EPOCH
           flit build --no-use-vcs
       - name: Store the distribution packages
@@ -84,4 +84,4 @@ jobs:
       - name: Upload artifact signatures to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: gh release upload '${{ github.ref_name }}' dist/**
+        run: gh release upload '${{ github.ref_name }}' dist/
