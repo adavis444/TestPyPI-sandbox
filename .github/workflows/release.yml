@@ -17,7 +17,7 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: |
           SOURCE_DATE_EPOCH=$(date +%s)
-          mkdir -p dist
+          mkdir -p dist/
           echo $SOURCE_DATE_EPOCH | tee SOURCE_DATE_EPOCH
           flit build --no-use-vcs
       - name: Store the distribution packages
@@ -62,21 +62,21 @@ jobs:
       contents: write # IMPORTANT: mandatory for making GitHub Releases
       id-token: write # IMPORTANT: mandatory for sigstore
     steps:
+      - uses: actions/checkout@v4
       - name: Download all the dists
         uses: actions/download-artifact@v4
         with:
           name: python-package-distributions
           path: dist/
-      - name: Sign the dists with Sigstore
-        uses: sigstore/gh-action-sigstore-python@v2.1.1
-        with:
-          inputs: ./dist/**
       - name: Download SOURCE_DATE_EPOCH
         uses: actions/download-artifact@v4
         with:
           name: SOURCE_DATE_EPOCH
           path: dist/
-      - uses: actions/checkout@v4
+      - name: Sign the dists with Sigstore
+        uses: sigstore/gh-action-sigstore-python@v2.1.1
+        with:
+          inputs: dist/
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -84,4 +84,4 @@ jobs:
       - name: Upload artifact signatures to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: gh release upload '${{ github.ref_name }}' dist/**
+        run: gh release upload '${{ github.ref_name }}' dist/
